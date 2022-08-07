@@ -1,2 +1,1 @@
-# PROYECTO CAPSTONE
-  Diplomado Internet de las cosas SAMSUNG Innovation Campus
+# PROYECTO CAPSTONE: Diplomado Internet de las cosas SAMSUNG Innovation Campus

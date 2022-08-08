@@ -1,0 +1,775 @@
+[
+    {
+        "id": "b0db674d465dac74",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f5698cc7130e1d11",
+        "type": "ui_slider",
+        "z": "b0db674d465dac74",
+        "name": "kp",
+        "label": "kp",
+        "tooltip": "",
+        "group": "da655692695c49f3",
+        "order": 2,
+        "width": 16,
+        "height": 1,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "0.0",
+        "max": "9.0",
+        "step": "0.10",
+        "className": "",
+        "x": 170,
+        "y": 40,
+        "wires": [
+            [
+                "2a2ffa83ca747d68"
+            ]
+        ]
+    },
+    {
+        "id": "8157758c98581d8d",
+        "type": "ui_slider",
+        "z": "b0db674d465dac74",
+        "name": "kd",
+        "label": "kd",
+        "tooltip": "",
+        "group": "da655692695c49f3",
+        "order": 6,
+        "width": 16,
+        "height": 1,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "0.01",
+        "max": "0.99",
+        "step": "0.01",
+        "className": "",
+        "x": 170,
+        "y": 80,
+        "wires": [
+            [
+                "68dd98828e51a638"
+            ]
+        ]
+    },
+    {
+        "id": "53eb77a37c1fddd1",
+        "type": "ui_slider",
+        "z": "b0db674d465dac74",
+        "name": "vel",
+        "label": "vel",
+        "tooltip": "",
+        "group": "da655692695c49f3",
+        "order": 10,
+        "width": 16,
+        "height": 1,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "0",
+        "max": "39",
+        "step": "1",
+        "className": "",
+        "x": 170,
+        "y": 120,
+        "wires": [
+            [
+                "442749b0b7b4f5cb"
+            ]
+        ]
+    },
+    {
+        "id": "2a2ffa83ca747d68",
+        "type": "function",
+        "z": "b0db674d465dac74",
+        "name": "",
+        "func": "global.set(\"kp\",msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "68dd98828e51a638",
+        "type": "function",
+        "z": "b0db674d465dac74",
+        "name": "",
+        "func": "global.set(\"kd\",msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "442749b0b7b4f5cb",
+        "type": "function",
+        "z": "b0db674d465dac74",
+        "name": "",
+        "func": "global.set(\"vel\",msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "96cb6ee819294514",
+        "type": "ui_button",
+        "z": "b0db674d465dac74",
+        "name": "",
+        "group": "da655692695c49f3",
+        "order": 14,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "label": "button",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 170,
+        "y": 220,
+        "wires": [
+            [
+                "f15b0ed30e1a5a7c"
+            ]
+        ]
+    },
+    {
+        "id": "f15b0ed30e1a5a7c",
+        "type": "function",
+        "z": "b0db674d465dac74",
+        "name": "",
+        "func": "msg.payload=(global.get(\"kp\")+\",\"+global.get(\"kd\")+\",\"+global.get(\"vel\"));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 220,
+        "wires": [
+            [
+                "05ab4ecbf78c3509",
+                "838b439463054a7c"
+            ]
+        ]
+    },
+    {
+        "id": "05ab4ecbf78c3509",
+        "type": "mqtt out",
+        "z": "b0db674d465dac74",
+        "name": "",
+        "topic": "seguidor/linea/kp",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "02aa3687c97b02eb",
+        "x": 570,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "4bd737502035fcf9",
+        "type": "mqtt in",
+        "z": "b0db674d465dac74",
+        "name": "",
+        "topic": "Seguidor/delinea/capstone",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "02aa3687c97b02eb",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 460,
+        "wires": [
+            [
+                "99f8b90b48fe27b8",
+                "312b911c49b73518"
+            ]
+        ]
+    },
+    {
+        "id": "99f8b90b48fe27b8",
+        "type": "json",
+        "z": "b0db674d465dac74",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 370,
+        "y": 460,
+        "wires": [
+            [
+                "2be7674f177cbc80"
+            ]
+        ]
+    },
+    {
+        "id": "2be7674f177cbc80",
+        "type": "function",
+        "z": "b0db674d465dac74",
+        "name": "",
+        "func": "var position= parseInt(msg.payload.posicion);\nvar error= parseInt(msg.payload.error);\nvar ui= parseInt(msg.payload.ui);\nvar ud= parseInt(msg.payload.ud);\nvar s1= parseInt(msg.payload.s1);\nvar s2= parseInt(msg.payload.s2);\nvar s3= parseInt(msg.payload.s3);\nvar s4= parseInt(msg.payload.s4);\nvar s5= parseInt(msg.payload.s5);\nvar s6= parseInt(msg.payload.s6);\nvar s7= parseInt(msg.payload.s7);\nvar s8= parseInt(msg.payload.s8);\n\nmsg.topic=\"INSERT INTO capstone(position,error,Ui,Ud,s1,s2,s3,s4,s5,s6,s7,s8) VALUES ('\"+position+\"','\"+error+\"','\"+ui+\"','\"+ud+\"','\"+s1+\"','\"+s2+\"','\"+s3+\"','\"+s4+\"','\"+s5+\"','\"+s6+\"','\"+s7+\"','\"+s8+\"')\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 480,
+        "wires": [
+            [
+                "d479d2e37b331606"
+            ]
+        ]
+    },
+    {
+        "id": "d479d2e37b331606",
+        "type": "mysql",
+        "z": "b0db674d465dac74",
+        "mydb": "84f827327234e6ec",
+        "name": "",
+        "x": 800,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "312b911c49b73518",
+        "type": "debug",
+        "z": "b0db674d465dac74",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 390,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "838b439463054a7c",
+        "type": "debug",
+        "z": "b0db674d465dac74",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "9c83ec27bf5f2ccc",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 1,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "49df82133e38f9de",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 3,
+        "width": 4,
+        "height": 1
+    },
+    {
+        "id": "5fe1c8ccfa1ee5c4",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 4,
+        "width": 26,
+        "height": 1
+    },
+    {
+        "id": "8a4f78e59c91d0af",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 5,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "377a452ff3c19c32",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 7,
+        "width": 4,
+        "height": 1
+    },
+    {
+        "id": "389dd265797017b4",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 8,
+        "width": 26,
+        "height": 1
+    },
+    {
+        "id": "f928cc50f3c696c6",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 9,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "91fa808030d626e7",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 11,
+        "width": 4,
+        "height": 1
+    },
+    {
+        "id": "f6795760d8c71ea5",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 12,
+        "width": 26,
+        "height": 1
+    },
+    {
+        "id": "75191449cd9c2272",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 13,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "d2cd15a17bbdc188",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 15,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "a0864f08dfd1e6e2",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 16,
+        "width": 26,
+        "height": 1
+    },
+    {
+        "id": "87d9b92b01e6f3cc",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 17,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "c6594e4874a465f0",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 19,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "6902612f32c5948d",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 21,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "f2f703996baa6aac",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 23,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "7bdba945f1e6fadd",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 25,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "6e3fa7e52bd0e71c",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 26,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "e44fb78940c50778",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 27,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "a1105fd019dea785",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 28,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "b94a323229b640f0",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 29,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "49bb6f502ea988ce",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 30,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "04af05f68e7b9932",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 31,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "37062b6168b950ef",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 32,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "0f03c692274c46c3",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 33,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "8375ab20409ffb2e",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 34,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "29b9a0b9613cc5b9",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 35,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "7d7911de42278376",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 36,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "d3117a747222a36b",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 37,
+        "width": 26,
+        "height": 1
+    },
+    {
+        "id": "435b7014b76358ce",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 38,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "bc45958d9cfd7f8f",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 47,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "056480d22899b3f4",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 48,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "81ac2722dd941805",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 49,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "9737f567f9a14101",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 50,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "2930bacc7cb36f5a",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 51,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "9edb79581ee54991",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 52,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "8cb933e4a8fe38f5",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 53,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "63bb6aa53aad47c9",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 54,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "28c58caddaf56bd8",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 55,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "b70c3ba68c8677e6",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 56,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "d03e5b2416c0fed9",
+        "type": "ui_spacer",
+        "z": "b0db674d465dac74",
+        "name": "spacer",
+        "group": "da655692695c49f3",
+        "order": 57,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "da655692695c49f3",
+        "type": "ui_group",
+        "name": "Seguidor_que_no_sigue",
+        "tab": "8057b65e49781488",
+        "order": 1,
+        "disp": true,
+        "width": "26",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "02aa3687c97b02eb",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.1.65",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "84f827327234e6ec",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "seguidor",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "8057b65e49781488",
+        "type": "ui_tab",
+        "name": "Seguidor_capstone",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

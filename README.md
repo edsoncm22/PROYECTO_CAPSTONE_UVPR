@@ -1,7 +1,9 @@
 ![CAPSTONE](IMAGENES/DESCRIPCION_GENERAL.png)
 # Monitoreo remoto de variables para optimización de un control de velocidad de un vehículo.
+
 ## Universidad Veracruzana                                                                                                                                     
 Facultad de Ingeniería en Electronica y Comunicaciones, Región Poza Rica - Tuxpan
+
 ## Equipo 18:
 * Dr. Miguel Ángel Rojas Hernández
 * Dr. Edson Eduardo Cruz Miguel
@@ -22,8 +24,9 @@ El presente proyecto tiene como finalidad la implementación de un controlador p
 * Micromotor pololu 10:1, este motorreductor es un motor de CC con escobillas de 6 V de alta potencia en miniatura con una caja de engranajes de metal de 9.96:1. Tiene una sección transversal de 10 × 12 mm y el eje de salida tiene 9 mm de largo y 3 mm de diámetro.
 * Llantas para Seguidor de linea de alto desempeño, se muestran en Figura 9. Estas llantas están diseñadas para tener una máxima adherencia,  lo que las hace perfectas para competencias de robótica. Tienen un peso de 18 gramos por llanta y 2 cm de diámetro, rin de aluminio, con orificio de tornillo para sujetarlo al motor compatible con motores Pololu con eje de 3mm.
 
+## Implementación en FPGA
 ![CAPSTONE](IMAGENES/RTL_FPGA.png)
-
+$u[nTs] = (k_p + \frac{k_d}{Ts}) e[nT_s] + \frac{k_d}{Ts} e[nT_s - Ts]$
 ![CAPSTONE](IMAGENES/CONTROL_PD.png)
 
 

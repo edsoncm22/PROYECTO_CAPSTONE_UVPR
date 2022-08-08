@@ -1,10 +1,10 @@
 
-# Proyecto Capstone: 
-# Monitoreo remoto de variables para optimización de un control de velocidad de un vehículo.
-## Universidad Veracruzana 
-Facultad de Ingeniería en Electronica y Comunicaciones 
-Región Poza Rica - Tuxpan
-
+# Proyecto Capstone:                                                                                                                                                      Monitoreo remoto de variables para optimización de un control de velocidad de un vehículo.
+## Universidad Veracruzana                                                                                                                                                Facultad de Ingeniería en Electronica y Comunicaciones                                                                                                                  Región Poza Rica - Tuxpan
+## Equipo 18:                                                                                                                                                    
+*Dr. Miguel Ángel Rojas Hernández                                                                                                                                  
+*Dr. Edson Eduardo Cruz Miguel 
+*Mtro. Omar Alenxander Barra Vázquez
 
 ![CAPSTONE](IMAGENES/DESCRIPCION_GENERAL.png)
 

@@ -11,6 +11,7 @@ Facultad de Ingeniería en Electronica y Comunicaciones, Región Poza Rica - Tux
 
 ## Resumen
 ![CAPSTONE](IMAGENES/LAMBUPDUINO.png)
+
 El presente proyecto tiene como finalidad la implementación de un controlador para el seguimiento de trayectorias de un robot seguidor de línea y el monitoreo de variables de cada sensor involucrado para tener el histórico y realizar la toma de decisiones sobre los parámetros del controlador a través del uso del IoT. Para el control del robot se empleo una FPGA open source, para el envío de la información se utilizó un ESP8266 y como servidor se utilizó una Raspberry pi 4.
 
 * En este enlace [youtube video](https://www.youtube.com/watch?v=SAdCPYdH9SM) puedes verlo en accion!
@@ -31,9 +32,11 @@ El diseño del PCB se realizaron utilizando el software EasyEDA Designer, en el 
 
 
 ## Implementación en FPGA
+
 La implementación del sistema digital total en la FPGA se muestra en la Figura 11. El módulo para el control y adquisición del sensor QTR-8RC se implementó bajo la siguiente lógica: encender los LED IR, configurar la línea de E/S en una salida y poner en alta impedancia, esperar al menos 10 μs para que aumente la salida del sensor. Configurar la línea de E/S en una entrada (alta impedancia). Y finalmente medir el tiempo que tarda el voltaje en decaer esperando que la línea de E/S baje y apague los LED IR. De esta manera podemos determinar cuando el robot se encuentra sobre la línea negra. El objetivo principal es mantener al robot al centro de la línea negra. Para cumplir con este objetivo se diseño un algoritmo de promedio ponderado para obtener valores numéricos de la posición respecto a la línea negra. El controlador PD tiene una entrada en punto fijo con un formato 16.0 y las ganancias tienen un formato 11.5. La señal de control tiene un formato 16.0, pero se realiza un recorte de bits y el formato de entrada a los módulos PWM son de 8 bits.
 La implementación de los módulos PWM se realizaron para la aplicación de la señal de control a los motores. Estas señales fueron generadas bajo el funcionamiento de la Figura 12. Esta señal es la entrada del puente H TB6612 que se encarga de realizar la amplificación de potencia y entregar un voltaje a los motores. La salida del módulo CONTROL_PD es una señal que va de -100 a 100, misma que entra a los módulos PWM. Un 100% representa la máxima entrada al motor que son 6V.
 El controlador PD debe configurarse con las ganancias adecuadas para un funcionamiento correcto del robot y que pueda seguir la trayectoria correctamente. También es posible configurar la velocidad a la que se desplaza el robot. El sistema descrito también es capaz de enviar los valores de cada sensor, de la posición, error y señal de control aplicada a cada motor en tiempo real. Para esto fue necesario crear un módulo de comunicación. Se seleccionó el protocolo UART, cuyo funcionamiento se explica en la Figura 13. Este modulo se encarga de enviar las variables descritas anteriormente al ESP8266, recibir las configuraciones del controlador y velocidad del mismo. Es importante mencionar que se trabajó con datos en formato decimal y no en cadenas de caracteres o formatos ASCII.
+
 ![CAPSTONE](IMAGENES/RTL_FPGA.png)
 
 * $u[nTs] = (k_p + \frac{k_d}{Ts}) e[nT_s] + \frac{k_d}{Ts} e[nT_s - Ts]$
@@ -46,6 +49,8 @@ El ESP8266 se encarga de realizar la cominicación entre la FPGA. Recibe los dat
 
 ## Desarrollo en Node-Red
 El flow se divide en 2 partes, la primer sección se creo para manipular el dashboard desde un usuario remoto, donde es posible modificar las ganancias del controlador PD y la velocidad 
+
+
 ![CAPSTONE](IMAGENES/FLOW_NODE_RED.png)
 
 
@@ -54,5 +59,6 @@ El flow se divide en 2 partes, la primer sección se creo para manipular el dash
 
 ## Grafana
 La implementación en Grafana se encarga de obtener los datos recibidos del ESP8266 como posición del robot, error, señal de control aplicada al motor derecho e izquierdo desde la base generada en mysql, posteriormente graficarlos y actulizarlos cada segundo.
+
 ![CAPSTONE](IMAGENES/GRAFANA.png)
 

@@ -105,5 +105,6 @@ select * from capstone;
 ## Grafana
 La implementación en Grafana se encarga de obtener los datos recibidos del ESP8266 como posición del robot, error, señal de control aplicada al motor derecho e izquierdo desde la base generada en mysql, posteriormente graficarlos y actulizarlos cada segundo.
 
+
 ![CAPSTONE](IMAGENES/GRAFANA.png)
 

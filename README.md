@@ -57,16 +57,9 @@ La implementación del sistema digital total consta de 5 partes importantes:
 
 * La implementación de los módulos PWM se realizaron para la aplicación de la señal de control a los motores. Estos módulos fueron construidos a partir de un contador y un comparador menor que. Esta señal es la entrada del puente H TB6612 que se encarga de realizar la amplificación de potencia y entregar un voltaje a los motores. La salida del módulo CONTROL_PD es una señal que va de -100 a 100, misma que entra a los módulos PWM. Un 100% representa la máxima entrada al motor que son 6V.
 
-* El controlador PD debe configurarse con las ganancias adecuadas para un funcionamiento correcto del robot y que pueda seguir la trayectoria correctamente. También es posible configurar la velocidad a la que se desplaza el robot. El sistema descrito también es capaz de enviar los valores de cada sensor, de la posición, error y señal de control aplicada a cada motor en tiempo real. Para esto fue necesario crear un módulo de comunicación. Se seleccionó el protocolo UART, cuyo funcionamiento se explica en la Figura 13. Este modulo se encarga de enviar las variables descritas anteriormente al ESP8266, recibir las configuraciones del controlador y velocidad del mismo. Es importante mencionar que se trabajó con datos en formato decimal y no en cadenas de caracteres o formatos ASCII.
+* El módulo UART se encarga de realizar la comunicación entre el ESP8266. Recibe la configuración del controlador PD y la velocidad a la que se desplaza el robot, mismas que son enviadas desde el dashboard. Este módulo también se encarga de enviar al ESP8266 los valores de cada sensor, la posición, la error y señal de control aplicada a cada motor en tiempo real.
 
-
-
-
-
-
-
-
-
+Para la implementación del sistema total se emplearon herramientas libres, sin embargo, los módulos descritos pueden utilizarse para cualquier familia de FPGA y por consiguiente en cualquier software del fabricante.
 
 ## Implementación en ESP8266
 El ESP8266 se encarga de realizar la cominicación entre la FPGA. Recibe los datos de los sensores, la posición y error del robot, así como las señales de control aplicadas a cada motor. Recibe 12 variables en formato entero de 8 bits (1 byte) de la FPGA y las manda a la base de datos a traves de WIFI. También se encarga de recibir los datos caonfigurados desde dashboard, es decir, recibe las ganancias del controlador y velocidad del robot que se genenran en la GUI (Interfaz Gráfica de Usuario) en el dashboard. Posteriormente, manipula estas variables recibidas en cadena de caracteres y las decodifica en variables de 16 bits en formato punto fijo 11.5 (ganancias $b_0$ y $b_1$ del controlador PD digital) y la velocidad en formato entero de 8 bits para enviarlas a la FPGA. De esta forma es como mantiene una función muy importante en la aplicación IoT como traductor entre el robot y las interfaces desarrolladas en Node-Red y Grafana.

@@ -55,6 +55,35 @@ El flow se divide en 2 partes, la primer sección se creo para manipular el dash
 
 ![CAPSTONE](IMAGENES/DASHBOARD_FPGA.jpeg)
 
+Todas las variables se reciben como una cadena de caracteres y son convertidas en un objeto de json que posteriormente se envía a nuestra base de datos usando los nodos de mysql.
+
+## Mysql
+
+Para recibir los datos desde node red es necesario instalar y configurar mysql, el proceo de instalación de node-red en obuntu pueden consultarse en la plataforma del curso.
+
+Una vez instalado se debe crear una base de datos usando el comando
+
+```
+CREATE DATABASE seguidor;
+```
+
+Accedemos a la base de datos
+
+```
+use seguidor; 
+```
+
+Se crea una tabla con los campos de los 12 sensores utilizados en el seguidor de linea
+
+```
+CREATE TABLE capstone(position INT, error INT, Ui INT, Ud INT,s1 INT, s2 INT, s3 INT, s4 INT, s5 INT,s6 INT, s7 INT, s8 INT);
+```
+
+accedemos a la base de datos
+
+```
+select * from capstone;
+```
 
 ## Grafana
 La implementación en Grafana se encarga de obtener los datos recibidos del ESP8266 como posición del robot, error, señal de control aplicada al motor derecho e izquierdo desde la base generada en mysql, posteriormente graficarlos y actulizarlos cada segundo.

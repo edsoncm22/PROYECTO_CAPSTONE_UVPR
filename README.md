@@ -45,14 +45,13 @@ El controlador PD debe configurarse con las ganancias adecuadas para un funciona
 ![CAPSTONE](IMAGENES/CONTROL_PD.png)
 
 ## Implementación en ESP8266
-El ESP8266 se encarga de realizar la cominicación entre la FPGA. Recibe los datos de los sensores, la posición y error del robot, así como las señales de control aplicadas a cada motor. Recibe 12 variables en formato entero de 8 bits (1 byte) de la FPGA y las manda a la base de datos a traves de WIFI. También se encarga de recibir los datos caonfigurados desde dashboard, es decir, recibe las ganancias del controlador y velocidad del robot que se genenran en la GUI (Interfaz Gráfica de Usuario) en el dashboard. Posteriormente, manipula estas variables recibidas en cadena de caracteres y las decodifica en variables de 16 bits en formato punto fijo 5.11 (ganancias $b_0$ y $b_1$ del controlador PD digital) y la velocidad en formato entero de 8 bits para enviarlas a la FPGA. De esta forma es como mantiene una función muy importante en la aplicación IoT como traductor entre el robot y las interfaces desarrolladas en Node-Red y Grafana.
+El ESP8266 se encarga de realizar la cominicación entre la FPGA. Recibe los datos de los sensores, la posición y error del robot, así como las señales de control aplicadas a cada motor. Recibe 12 variables en formato entero de 8 bits (1 byte) de la FPGA y las manda a la base de datos a traves de WIFI. También se encarga de recibir los datos caonfigurados desde dashboard, es decir, recibe las ganancias del controlador y velocidad del robot que se genenran en la GUI (Interfaz Gráfica de Usuario) en el dashboard. Posteriormente, manipula estas variables recibidas en cadena de caracteres y las decodifica en variables de 16 bits en formato punto fijo 11.5 (ganancias $b_0$ y $b_1$ del controlador PD digital) y la velocidad en formato entero de 8 bits para enviarlas a la FPGA. De esta forma es como mantiene una función muy importante en la aplicación IoT como traductor entre el robot y las interfaces desarrolladas en Node-Red y Grafana.
 
 ## Desarrollo en Node-Red
-El flow se divide en 2 partes, la primer sección se creo para manipular el dashboard desde un usuario remoto, donde es posible modificar las ganancias del controlador PD y la velocidad 
-
 
 ![CAPSTONE](IMAGENES/FLOW_NODE_RED.png)
 
+El flow se divide en 2 partes, la primer sección se creo para manipular el dashboard desde un usuario remoto, donde es posible modificar las ganancias del controlador PD y la velocidad del robot. La parte superior que se muestra en el flow, son los slide que configuran dichas variables y un botón para enviar una sola vez los parámetros. En la parte inferior se tiene la recepción de los sensores, así como la extracción de cada uno para registrarla en la base de datos creada en mysql.
 
 ![CAPSTONE](IMAGENES/DASHBOARD_FPGA.jpeg)
 

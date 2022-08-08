@@ -13,7 +13,7 @@ Facultad de Ingeniería en Electronica y Comunicaciones, Región Poza Rica - Tux
 ![CAPSTONE](IMAGENES/LAMBUPDUINO.png)
 El presente proyecto tiene como finalidad la implementación de un controlador para el seguimiento de trayectorias de un robot seguidor de línea y el monitoreo de variables de cada sensor involucrado para tener el histórico y realizar la toma de decisiones sobre los parámetros del controlador a través del uso del IoT. Para el control del robot se empleo una FPGA open source, para el envío de la información se utilizó un ESP8266 y como servidor se utilizó una Raspberry pi 4.
 
-
+* En este enlace [youtube video](https://www.youtube.com/watch?v=SAdCPYdH9SM) puedes verlo en accion!
 
 ## MATERIALES
 ![CAPSTONE](IMAGENES/MATERIALES.png)

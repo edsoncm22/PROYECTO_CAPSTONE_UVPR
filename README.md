@@ -25,13 +25,13 @@ El presente proyecto tiene como finalidad la implementación de un controlador p
 * Llantas para Seguidor de linea de alto desempeño, se muestran en Figura 9. Estas llantas están diseñadas para tener una máxima adherencia,  lo que las hace perfectas para competencias de robótica. Tienen un peso de 18 gramos por llanta y 2 cm de diámetro, rin de aluminio, con orificio de tornillo para sujetarlo al motor compatible con motores Pololu con eje de 3mm.
 
 ## Diseño de la PCB
+El diseño del PCB se realizaron utilizando el software EasyEDA Designer, en el presente proyecto se encuentran los archivos json. En la siguiente figura se muestra el esquemático que se utilizó para la construcción del PCB del robot seguidor de línea. Cuenta con todos los elementos descritos en la sección anterior, además de reguladores de voltaje para acondicionar los niveles requeridos por cada dispositivo. En el caso de la FPGA un regulador de 5V y 3.3V. Para la parte lógica del puente H 3.3V, los sensores a 3.3V. Y 7.4V para la parte de potencia (alimentación del puente H).
+
 ![CAPSTONE](IMAGENES/ESQUEMATICO_PCB.jpg)
 
 
-![CAPSTONE](IMAGENES/PCB.png)
-
-
 ## Implementación en FPGA
+
 ![CAPSTONE](IMAGENES/RTL_FPGA.png)
 $u[nTs] = (k_p + \frac{k_d}{Ts}) e[nT_s] + \frac{k_d}{Ts} e[nT_s - Ts]$
 ![CAPSTONE](IMAGENES/CONTROL_PD.png)

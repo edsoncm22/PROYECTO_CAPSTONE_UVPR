@@ -34,11 +34,11 @@ El diseño del PCB se realizaron utilizando el software EasyEDA Designer, en el 
 ## Implementación en FPGA
 
 La implementación del sistema digital total consta de 5 partes importantes:
-1 La lectura de los sensores.
-2 El algoritmo de promedio ponderado.
-3 El controlador PD.
-4 Los módulos PWM.
-5 Protocolo UART.
+1. La lectura de los sensores.
+2. El algoritmo de promedio ponderado.
+3. El controlador PD.
+4. Los módulos PWM.
+5. Protocolo UART.
 
 El módulo para el control y adquisición del sensor QTR-8RC se implementó bajo la siguiente lógica: encender los LED IR, configurar la línea de E/S en una salida y poner en alta impedancia, esperar al menos 10 μs para que aumente la salida del sensor. Configurar la línea de E/S en una entrada (alta impedancia). Y finalmente medir el tiempo que tarda el voltaje en decaer esperando que la línea de E/S baje y apague los LED IR. De esta manera podemos determinar cuando el robot se encuentra sobre la línea negra. El objetivo principal es mantener al robot al centro de la línea negra. Para cumplir con este objetivo se diseño un algoritmo de promedio ponderado para obtener valores numéricos de la posición respecto a la línea negra. El controlador PD tiene una entrada en punto fijo con un formato 16.0 y las ganancias tienen un formato 11.5. La señal de control tiene un formato 16.0, pero se realiza un recorte de bits y el formato de entrada a los módulos PWM son de 8 bits.
 La implementación de los módulos PWM se realizaron para la aplicación de la señal de control a los motores. Estas señales fueron generadas bajo el funcionamiento de la Figura 12. Esta señal es la entrada del puente H TB6612 que se encarga de realizar la amplificación de potencia y entregar un voltaje a los motores. La salida del módulo CONTROL_PD es una señal que va de -100 a 100, misma que entra a los módulos PWM. Un 100% representa la máxima entrada al motor que son 6V.
